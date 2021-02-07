@@ -74,6 +74,7 @@ function DashboardCandidate() {
               {date.getFullYear()}{" "}
             </small>
             <div className="candidate-ranking-positions">
+              {candidates[0] && (
               <div className="candidate-cards">
                 <div className="candidate-card">
                   <div className="card-head">
@@ -106,6 +107,7 @@ function DashboardCandidate() {
                   </p>
                 </div>
               </div>
+              )}
               <div className="candidate-ranking-other-positions">
                 <table>
                   <thead>
