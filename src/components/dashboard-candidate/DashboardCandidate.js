@@ -11,7 +11,8 @@ import number2 from "../../images/2.svg";
 import number3 from "../../images/3.svg";
 
 function DashboardCandidate() {
-  const [candidate, setCandidate] = useState({});
+  const [candidates, setCandidates] = useState([]);
+  const [contador, setContador] = useState(0);
 
   let date = new Date();
   let monName = new Array(
@@ -31,27 +32,17 @@ function DashboardCandidate() {
     async function fetchData() {
       try {
         const response = await axios.get(
-          "https://contrate-me-api.herokuapp.com/solutions"
-        );
-
-        // console.log(response.data);
-        // setState();
-      } catch (err) {}
-    }
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await axios.get(
           "https://contrate-me-api.herokuapp.com/candidates"
         );
-        setCandidate(response.data[3]);
+        setCandidates(response.data);
       } catch (err) {}
     }
     fetchData();
   }, []);
+
+  function atualizaContador(){
+    setContador(contador+1);
+  }
 
   return (
     <div className="candidate-dashboard-container">
@@ -87,31 +78,31 @@ function DashboardCandidate() {
                 <div className="candidate-card">
                   <div className="card-head">
                     <img src={number1} />
-                    <h3>Nome</h3>
+                    <h3>{candidates[0].nome}</h3>
                   </div>
                   <p className="card-candidate-function">Função</p>
                   <p className="card-candidate-score">
-                    0 testes/<strong>9.75</strong>
+                  {candidates[0].testesResolvidos>0?candidates[0].testesResolvidos:0} testes/<strong>{candidates[0].testesResolvidos>0?(candidates[0].somaTotal/candidates[0].testesResolvidos):''}</strong>
                   </p>
                 </div>
                 <div className="candidate-card">
                   <div className="card-head">
                     <img src={number2} />
-                    <h3>Nome</h3>
+                    <h3>{candidates[1].nome}</h3>
                   </div>
                   <p className="card-candidate-function">Função</p>
                   <p className="card-candidate-score">
-                    0 testes/<strong>9.75</strong>
+                  {candidates[1].testesResolvidos>1?candidates[1].testesResolvidos:0} testes/<strong>{candidates[1].testesResolvidos>0?(candidates[1].somaTotal/candidates[1].testesResolvidos):''}</strong>
                   </p>
                 </div>
                 <div className="candidate-card">
                   <div className="card-head">
                     <img src={number3} />
-                    <h3>Nome</h3>
+                    <h3>{candidates[2].nome}</h3>
                   </div>
                   <p className="card-candidate-function">Função</p>
                   <p className="card-candidate-score">
-                    0 testes/<strong>9.75</strong>
+                  {candidates[2].testesResolvidos>2?candidates[2].testesResolvidos:2}testes/<strong>{candidates[2].testesResolvidos>2?(candidates[2].somaTotal/candidates[2].testesResolvidos):''}</strong>
                   </p>
                 </div>
               </div>
@@ -127,23 +118,30 @@ function DashboardCandidate() {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr className="purple-bg">
-                      <td>
-                        <strong>4°</strong>
-                      </td>
-                      <td>
-                        <strong>Nome</strong>
-                      </td>
-                      <td>
-                        <p className="small">Função</p>
-                      </td>
-                      <td>
-                        <strong>0</strong>
-                      </td>
-                      <td>
-                        <strong>9.75</strong>
-                      </td>
-                    </tr>
+                    {
+                      candidates.map(candidate =>(                        
+                         candidate._id != '602011736862870015d7b1ae' && candidate._id != '60203e910702e700156177d8' && (
+                              <tr className="purple-bg">
+                                <td>
+                                  <strong>4</strong>
+                                </td>
+                                <td>
+                                  <strong>{candidate.nome}</strong>
+                                </td>
+                                <td>
+                                  <p className="small">{candidate.areaInteresse}</p>
+                                </td>
+                                <td>
+                                  <strong>{candidate.testesResolvidos}</strong>
+                                </td>
+                                <td>
+                                  <strong>{candidate.testesResolvidos>0?(candidate.somaTotal/candidate.testesResolvidos):''}</strong>
+                                </td>
+                              </tr> 
+
+                         )
+                      ))
+                    }
                   </tbody>
                 </table>
               </div>
