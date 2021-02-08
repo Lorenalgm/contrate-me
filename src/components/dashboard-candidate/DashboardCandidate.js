@@ -11,8 +11,14 @@ import number2 from "../../images/2.svg";
 import number3 from "../../images/3.svg";
 
 function DashboardCandidate() {
+  const [candidate, setCandidate] = useState({});
   const [candidates, setCandidates] = useState([]);
-  const [contador, setContador] = useState(0);
+  let newArray = [...candidates];
+  let sortedArray = newArray.sort(function (a, b) {
+    if (a.somaTotal > b.somaTotal) {
+      return 1;
+    }
+  });
 
   let date = new Date();
   let monName = new Array(
@@ -34,15 +40,12 @@ function DashboardCandidate() {
         const response = await axios.get(
           "https://contrate-me-api.herokuapp.com/candidates"
         );
+        setCandidate(response.data[3]);
         setCandidates(response.data);
       } catch (err) {}
     }
     fetchData();
   }, []);
-
-  function atualizaContador(){
-    setContador(contador+1);
-  }
 
   return (
     <div className="candidate-dashboard-container">
@@ -74,40 +77,28 @@ function DashboardCandidate() {
               {date.getFullYear()}{" "}
             </small>
             <div className="candidate-ranking-positions">
-              {candidates[0] && (
               <div className="candidate-cards">
-                <div className="candidate-card">
-                  <div className="card-head">
-                    <img src={number1} />
-                    <h3>{candidates[0].nome}</h3>
+                {sortedArray.slice(0, 3).map((i, index) => (
+                  <div className="candidate-card">
+                    <div className="card-head">
+                      <img
+                        src={
+                          index + 1 === 1
+                            ? `${number1}`
+                            : index + 1 === 2
+                            ? `${number2}`
+                            : `${number3}`
+                        }
+                      />
+                      <h3>{i.nome}</h3>
+                    </div>
+                    <p className="card-candidate-function">{i.areaInteresse}</p>
+                    <p className="card-candidate-score">
+                      {i.testesResolvidos} testes/<strong>{i.somaTotal}</strong>
+                    </p>
                   </div>
-                  <p className="card-candidate-function">Função</p>
-                  <p className="card-candidate-score">
-                  {candidates[0].testesResolvidos>0?candidates[0].testesResolvidos:0} testes/<strong>{candidates[0].testesResolvidos>0?(candidates[0].somaTotal/candidates[0].testesResolvidos):''}</strong>
-                  </p>
-                </div>
-                <div className="candidate-card">
-                  <div className="card-head">
-                    <img src={number2} />
-                    <h3>{candidates[1].nome}</h3>
-                  </div>
-                  <p className="card-candidate-function">Função</p>
-                  <p className="card-candidate-score">
-                  {candidates[1].testesResolvidos>1?candidates[1].testesResolvidos:0} testes/<strong>{candidates[1].testesResolvidos>0?(candidates[1].somaTotal/candidates[1].testesResolvidos):''}</strong>
-                  </p>
-                </div>
-                <div className="candidate-card">
-                  <div className="card-head">
-                    <img src={number3} />
-                    <h3>{candidates[2].nome}</h3>
-                  </div>
-                  <p className="card-candidate-function">Função</p>
-                  <p className="card-candidate-score">
-                  {candidates[2].testesResolvidos>2?candidates[2].testesResolvidos:2}testes/<strong>{candidates[2].testesResolvidos>2?(candidates[2].somaTotal/candidates[2].testesResolvidos):''}</strong>
-                  </p>
-                </div>
+                ))}
               </div>
-              )}
               <div className="candidate-ranking-other-positions">
                 <table>
                   <thead>
@@ -120,30 +111,25 @@ function DashboardCandidate() {
                     </tr>
                   </thead>
                   <tbody>
-                    {
-                      candidates.map(candidate =>(                        
-                         candidate._id != '60207d178571860015e01c1f' && candidate._id != '60207d4b8571860015e01c20' && candidate._id != '60207d6e8571860015e01c21' && (
-                              <tr className="purple-bg">
-                                <td>
-                                  <strong>4</strong>
-                                </td>
-                                <td>
-                                  <strong>{candidate.nome}</strong>
-                                </td>
-                                <td>
-                                  <p className="small">{candidate.areaInteresse}</p>
-                                </td>
-                                <td>
-                                  <strong>{candidate.testesResolvidos}</strong>
-                                </td>
-                                <td>
-                                  <strong>{candidate.testesResolvidos>0?(candidate.somaTotal/candidate.testesResolvidos):''}</strong>
-                                </td>
-                              </tr> 
-
-                         )
-                      ))
-                    }
+                    {sortedArray.slice(3, 4).map((i, index) => (
+                      <tr className="purple-bg">
+                        <td>
+                          <strong>{index + 4}°</strong>
+                        </td>
+                        <td>
+                          <strong>{i.nome}</strong>
+                        </td>
+                        <td>
+                          <p className="small">{i.areaInteresse}</p>
+                        </td>
+                        <td>
+                          <strong>{i.testesResolvidos}</strong>
+                        </td>
+                        <td>
+                          <strong>{i.somaTotal}</strong>
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>
