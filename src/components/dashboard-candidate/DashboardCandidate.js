@@ -122,7 +122,7 @@ function DashboardCandidate() {
                   <tbody>
                     {
                       candidates.map(candidate =>(                        
-                         candidate._id != '602011736862870015d7b1ae' && candidate._id != '60203e910702e700156177d8' && (
+                         candidate._id != '60207d178571860015e01c1f' && candidate._id != '60207d4b8571860015e01c20' && candidate._id != '60207d6e8571860015e01c21' && (
                               <tr className="purple-bg">
                                 <td>
                                   <strong>4</strong>

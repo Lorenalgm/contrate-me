@@ -6,3 +6,60 @@
     margin: 0;
     width: 100%;
 }
+
+.my-challenge{
+    border: 3px solid rgba(166, 8, 255, 0.5);
+    box-sizing: border-box;
+    border-radius: 8px;
+    width: 755px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 2em;
+}
+
+.my-challenge form{
+    margin: 0;
+}
+
+.my-challenge h3{
+    font-family: IBM Plex Mono;
+    font-size: 18px;
+    margin: 0;
+    margin-top: 2em;
+}
+
+.my-challenges-content h1{
+    margin: 0;
+    font-size: 30px;
+    margin-left: 8.5em;
+}
+
+.send-btn {
+    color: white;
+    background: linear-gradient(44.11deg, #cd10ff 15.75%, #9f06ff 84.63%);
+    padding: 24px;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 33px;
+    border: none;
+    width: 95px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    transition: 0.1 ease-in-out;
+    margin: 1em;
+}
+
+.send-btn:hover {
+    cursor: pointer;
+    background: linear-gradient(44.11deg, #9f06ff 15.75%, #cd10ff 84.63%);
+    opacity: 1;
+  }
+
+ .my-challenge img{
+    margin: 0 1em;
+ }
+
+ .mysolution{
+     margin: 0;
+ }
