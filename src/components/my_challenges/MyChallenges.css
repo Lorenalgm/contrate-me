@@ -15,6 +15,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 2em;
+    padding: 1em;
 }
 
 .my-challenge form{
@@ -25,7 +26,6 @@
     font-family: IBM Plex Mono;
     font-size: 18px;
     margin: 0;
-    margin-top: 2em;
 }
 
 .my-challenges-content h1{
@@ -63,3 +63,39 @@
  .mysolution{
      margin: 0;
  }
+
+ .grade p{
+     font-size: 14px;
+     line-height: 1.5em;
+ }
+
+ .my-challenge .text-input {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+  }
+  
+   .text-input input {
+    width: 250px;
+    border: 1px solid #cfd0d7;
+    border-radius: 2px;
+    height: 42px;
+  }
+  
+  .my-challenge .text-input label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 0;
+    margin-bottom: 5px;
+    margin-top: 10px;
+  }
+
+  .my-challenge form{
+      display: flex;
+      align-items: end;
+  }
+
+  .send-btn{
+      margin: 0;
+      margin-top: 1.7em;
+  }

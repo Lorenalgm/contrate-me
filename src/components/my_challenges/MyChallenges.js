@@ -70,12 +70,12 @@ function MyChallenges() {
                             }
                             {challenge.nota > 0 && (
                               <div className="grade">
-                                <p className="total">Nota geral: {challenge.nota}</p>
-                                <p>Boas práticas: {challenge.boasPraticas}</p>
-                                <p>Documentação: {challenge.documentacao}</p>
-                                <p>Código limpo: {challenge.codigoLimpo}</p>
-                                <p>Controle de qualidade: {challenge.controleQualidade}</p>
-                                <p>Requisitos completos: {challenge.entrega}</p>
+                                <p className="total"><b>Nota geral:</b> {challenge.nota}</p>
+                                <p><b>Boas práticas:</b> {challenge.boasPraticas}</p>
+                                <p><b>Documentação:</b> {challenge.documentacao}</p>
+                                <p><b>Código limpo:</b> {challenge.codigoLimpo}</p>
+                                <p><b>Controle de qualidade:</b> {challenge.controleQualidade}</p>
+                                <p><b>Requisitos completos:</b> {challenge.entrega}</p>
                               </div>
                             )}
                           </div>
